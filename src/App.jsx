@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Aboout from './pages/Aboout'
 import Vans from './pages/Vans'
+import VanDetails from './pages/VanDetails'
 
 function App() {
 
@@ -18,11 +19,11 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/about' element={<Aboout></Aboout>}></Route>
         <Route path='/vans' element={<Vans></Vans>}></Route>
+        <Route path='/vans/:id' element={<VanDetails></VanDetails>}></Route>
       </Routes>
       <Footer>  </Footer>
     </BrowserRouter>
     </>
-  )
-}
+  )}
 
 export default App

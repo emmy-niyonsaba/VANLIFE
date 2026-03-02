@@ -15,7 +15,7 @@ const Vans = () => {
     return (
         <>
             <h1 className=' text-5xl font-bold  m-10'>Explore our van options</h1>
-                <div className='flex gap-4 m-10'>
+                <div className='flex gap-4 justify-around m-10'>
                     {categories.map((category) => {
                         return (
                             <button key={category} className=' bg-[#f0ca9c] text-white px-4 py-2 rounded-md'>{category}</button>
