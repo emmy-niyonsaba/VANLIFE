@@ -12,6 +12,7 @@ function HostLayout() {
       <div className=' flex gap-10 '>
         <NavLink to='/hosts' className={linkClass} end>Dashboard</NavLink>
         <NavLink to='/hosts/income' className={linkClass}>Income</NavLink>
+        <NavLink to='/hosts/vans' className={linkClass}>Vans</NavLink>
         <NavLink to='/hosts/reviews' className={linkClass}>Reviews</NavLink>
       </div>
       <Outlet />
