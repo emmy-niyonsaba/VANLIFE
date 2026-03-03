@@ -6,7 +6,6 @@ import { useState,useEffect } from 'react'
 function VanDetails() {
   const {id} = useParams()
   const [van, setVan] = useState(null)
-  console.log(van);
     useEffect(() => {
         fetch(`/api/vans/${id}`)
             .then(res => res.json())
