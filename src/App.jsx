@@ -5,7 +5,12 @@ import Home from './pages/Home'
 import Aboout from './pages/Aboout'
 import Vans from './pages/Vans'
 import VanDetails from './pages/VanDetails'
-import AppLayout from './components/AppLayout'
+import AppLayout from './layouts/AppLayout'
+import HostLayout from './layouts/HostLayout'
+import Dashboard from './components/hosts/Dashboard'
+import Income from './components/hosts/Income'
+import Reviews from './components/hosts/Reviews'
+
 
 function App() {
 
@@ -18,7 +23,15 @@ function App() {
             <Route path='/about' element={<Aboout></Aboout>}></Route>
             <Route path='/vans' element={<Vans></Vans>}></Route>
             <Route path='/vans/:id' element={<VanDetails></VanDetails>}></Route>
+
+            // Hosts router
+            <Route path='/hosts' element={<HostLayout />}>
+              <Route path='/hosts/dashboard' element={<Dashboard />}></Route>
+              <Route path='/hosts/income' element={<Income />}></Route>
+              <Route path='/hosts/reviews' element={<Reviews />}></Route>
+            </Route>
           </Route>
+
         </Routes>
 
 
