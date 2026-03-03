@@ -35,6 +35,7 @@ function App() {
               <Route index element={<Dashboard />}></Route>
               <Route path='income' element={<Income />}></Route>
               <Route path='vans' element={<HostVans />}></Route>
+              // the current van  router
               <Route path='vans/:id' element={<HostVanDetatils />}>
                 <Route path='details' element={<Details />}></Route>
                 <Route path='photos' element={<Photos />}></Route>

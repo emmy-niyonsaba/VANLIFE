@@ -18,7 +18,7 @@ function HostVanDetatils() {
     `font-bold hover:underline hover:bg-blue-200 p-2 rounded-md ${isActive ? "text-green-500" : ""
     }`;
   return (
-    <div>
+    <div className=' w-200 '>
       {
         van.map(van => <HostVanDetailsLayout key={van.id} {...van} />)
       }
@@ -27,7 +27,7 @@ function HostVanDetatils() {
           <NavLink to={`photos`} className={linkClass}>Photos</NavLink>
           <NavLink to={`price`} className={linkClass}>Price</NavLink>
         </div>
-      <Outlet></Outlet>
+      <Outlet context={van[0]}></Outlet>
     </div>
   )
 }
