@@ -26,7 +26,7 @@ function App() {
 
             // Hosts router
             <Route path='/hosts' element={<HostLayout />}>
-              <Route path='/hosts/dashboard' element={<Dashboard />}></Route>
+              <Route path='/hosts' element={<Dashboard />}></Route>
               <Route path='/hosts/income' element={<Income />}></Route>
               <Route path='/hosts/reviews' element={<Reviews />}></Route>
             </Route>
