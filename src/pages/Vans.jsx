@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import VansLayout from '../layouts/VansLayout'
 
 const Vans = () => {
-    const categories = ["simple", "luxury", "rugged"]
     const [vans, setVans] = useState([])
-    console.log(vans)
+    const [searchParams, setSearchParams] = useSearchParams()
+    console.log(searchParams.get('type'));
+    const categories = ["simple", "luxury", "rugged"]
+    // console.log(vans)
     useEffect(() => {
         fetch('/api/vans')
             .then(res => res.json())
