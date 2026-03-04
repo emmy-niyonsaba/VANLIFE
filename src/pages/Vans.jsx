@@ -28,7 +28,12 @@ const Vans = () => {
                         onClick={()=>setSearchParams({ type: category })}>{category}</button>
                     )
                 })}
+                {
+                    filterType?(
                 <Link><h2 className=' font-bold text-2xl '>Clear Filter</h2></Link>
+
+                    ):null
+                }
             </div>
             <div className='flex flex-wrap gap-4 justify-center mt-10'>
                 {
