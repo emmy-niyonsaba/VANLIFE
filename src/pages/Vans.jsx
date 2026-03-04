@@ -7,7 +7,7 @@ const Vans = () => {
     const [vans, setVans] = useState([])
 
     const [searchParams, setSearchParams] = useSearchParams()
-    const filterType = searchParams.get('type');
+    const filterType = searchParams.get('type'); 
     const filteredVans = filterType ? vans.filter(van => van.type === filterType) : vans;
 
     // Categories
