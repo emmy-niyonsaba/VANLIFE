@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { RouterProvider,  Route, createRoutesFromElements,createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import Aboout from './pages/Aboout'
 import Vans from './pages/Vans'
@@ -17,40 +17,33 @@ import Price from './components/hosts/Price'
 import Photos from './components/hosts/Photos'
 import NotFound from './pages/NotFound'
 
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<AppLayout />}>
+    <Route index element={<Home />} />
+    <Route path='about' element={<Aboout />} />
+    <Route path='vans' element={<Vans />} />
+    <Route path='vans/:id' element={<VanDetails />} />
+    <Route path='hosts' element={<HostLayout />}>
+      <Route index element={<Dashboard />} />
+      <Route path='income' element={<Income />} />
+      <Route path='vans' element={<HostVans />} />
+      <Route path='vans/:id' element={<HostVanDetatils />}>
+        <Route path='details' element={<Details />} />
+        <Route path='photos' element={<Photos />} />
+        <Route path='price' element={<Price />} />
+      </Route>
+      <Route path='reviews' element={<Reviews />} />
+    </Route>
+    <Route path='*' element={<NotFound />} />
+  </Route>
+))
+
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<AppLayout />}>
-                {/* Vans router */}
-            <Route index element={<Home></Home>}></Route>
-            <Route path='about' element={<Aboout></Aboout>}></Route>
-            <Route path='vans' element={<Vans></Vans>}></Route>
-            <Route path='vans/:id' element={<VanDetails></VanDetails>}></Route>
-
-            {/* Hosts router */}
-            <Route path='hosts' element={<HostLayout />}>
-              <Route index element={<Dashboard />}></Route>
-              <Route path='income' element={<Income />}></Route>
-              <Route path='vans' element={<HostVans />}></Route>
-              {/* the current van  router */}
-              <Route path='vans/:id' element={<HostVanDetatils />}>
-                <Route path='details' element={<Details />}></Route>
-                <Route path='photos' element={<Photos />}></Route>
-                <Route path='price' element={<Price />}></Route>
-              </Route>
-              <Route path='reviews' element={<Reviews />}></Route>
-            </Route>
-            <Route path='*' element={<NotFound />}></Route>
-          </Route>
-
-        </Routes>
-
-
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </>
   )
 }
