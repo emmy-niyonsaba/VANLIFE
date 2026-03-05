@@ -17,10 +17,12 @@ import Price from './components/hosts/Price'
 import Photos from './components/hosts/Photos'
 import NotFound from './pages/NotFound'
 import Error from './pages/Error'
+import Login from './pages/Login'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
+    <Route path='login' element={<Login />} />
     <Route path='about' element={<Aboout />} />
     <Route path='vans' element={<Vans />} loader={vansLoader } 
     errorElement={<Error />} />

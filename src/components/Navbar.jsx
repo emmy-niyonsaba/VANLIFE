@@ -15,6 +15,7 @@ function Navbar() {
           <span className="hamburger" />
         </button>
         <nav className={`nav-links ${open ? 'open' : ''}`} onClick={() => setOpen(false)}>
+          <NavLink to='/login'>Login</NavLink>
           <NavLink to="/hosts" className={linkClass}>Hosts</NavLink>
           <NavLink to="/about" className={linkClass}>About</NavLink>
           <NavLink to="/vans" className={linkClass}>Vans</NavLink>
