@@ -1,8 +1,14 @@
 import React from 'react'
-import { Outlet, NavLink, useLoaderData } from 'react-router-dom'
+import { Outlet, NavLink, useLoaderData  ,redirect} from 'react-router-dom'
 import HostVanDetailsLayout from '../layouts/HostVanDetailsLayout'
 
 export async function loader({ params }) {
+  const isLogedIn=true
+
+  if (!isLogedIn) {
+    return redirect('/login') 
+  }
+
   const response = await fetch(`/api/host/vans/${params.id}`)
 
   if (!response.ok) {

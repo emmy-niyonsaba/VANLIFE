@@ -1,51 +1,50 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useLoaderData, redirect } from 'react-router-dom'
 import VanDetailsLayout from '../layouts/VanDetailsLayout'
-import { useState,useEffect } from 'react'
-import Loading from '../components/Loading'
 
-function VanDetails() {
-  const {id} = useParams()
-  const [van, setVan] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
-    useEffect(() => {
-        const loadVan = async () => {
-          try {
-            setIsLoading(true)
-            setError('')
-            const response = await fetch(`/api/vans/${id}`)
-            if (!response.ok) {
-              throw new Error('Failed to fetch van details.')
-            }
-            const data = await response.json()
-            setVan(data.van || null)
-          } catch (err) {
-            setError(err.message || 'Unexpected error while loading van details.')
-          } finally {
-            setIsLoading(false)
-          }
-        }
+/* -----------------------------
+   Loader function for VanDetails
+--------------------------------*/
+export const loader = async ({ params }) => {
+  // Example auth check
+  const isLoggedIn = true
 
-        loadVan()
-    }, [id])
-
-  if (isLoading) {
-    return <Loading message="Loading van details..." />
+  // Redirect if user is not logged in
+  if (!isLoggedIn) {
+    return redirect('/login')
   }
 
-  if (error) {
+  // Fetch van details from API
+  const response = await fetch(`/api/vans/${params.id}`)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch van details.')
+  }
+
+  const data = await response.json()
+
+  // Ensure we return a single van object
+  return data.van || data.vans?.[0] || null
+}
+
+/* -----------------------------
+   VanDetails Component
+--------------------------------*/
+function VanDetails() {
+  const van = useLoaderData() // get the data from loader
+
+  // If no van is returned, show a friendly message
+  if (!van) {
     return (
-      <div className='status-card error'>
-        <h2>Could not load van details</h2>
-        <p>{error}</p>
+      <div className="status-card error">
+        <h2>Van not found</h2>
       </div>
     )
   }
 
   return (
     <div>
-      <VanDetailsLayout van={van}></VanDetailsLayout>
+      <VanDetailsLayout van={van} />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { RouterProvider,  Route, createRoutesFromElements,createBrowserRouter } 
 import Home from './pages/Home'
 import Aboout from './pages/Aboout'
 import Vans, {loader as vansLoader}from './pages/Vans'
-import VanDetails from './pages/VanDetails'
+import VanDetails ,{loader as vanDetailsLoader}from './pages/VanDetails'
 import AppLayout from './layouts/AppLayout'
 import HostLayout from './layouts/HostLayout'
 import Dashboard from './components/hosts/Dashboard'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='about' element={<Aboout />} />
     <Route path='vans' element={<Vans />} loader={vansLoader } 
     errorElement={<Error />} />
-    <Route path='vans/:id' element={<VanDetails />} />
+    <Route path='vans/:id' element={<VanDetails />} loader={vanDetailsLoader} errorElement={<Error />} />
     <Route path='hosts' element={<HostLayout />}>
       <Route index element={<Dashboard />} />
       <Route path='income' element={<Income />} />

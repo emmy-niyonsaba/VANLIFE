@@ -14,6 +14,11 @@ import HostVansLayout from '../layouts/HostVansLayout'
       
     }
     export function loader() {
+        const isLogedIn=true
+
+  if (!isLogedIn) {
+    return redirect('/login') 
+  }
       return loadHostVans()
     }
 
