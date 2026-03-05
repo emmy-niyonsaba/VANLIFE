@@ -11,23 +11,26 @@ import Dashboard from './components/hosts/Dashboard'
 import Income from './components/hosts/Income'
 import Reviews from './components/hosts/Reviews'
 import HostVans , { loader as hostVansLoader } from './pages/HostVans'
-import HostVanDetatils from './pages/HostVanDetatils'
+import HostVanDetatils,{loader as hostVanLoader} from './pages/HostVanDetatils'
 import Details from './components/hosts/Details'
 import Price from './components/hosts/Price'
 import Photos from './components/hosts/Photos'
 import NotFound from './pages/NotFound'
+import Error from './pages/Error'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
     <Route path='about' element={<Aboout />} />
-    <Route path='vans' element={<Vans />} loader={vansLoader } />
+    <Route path='vans' element={<Vans />} loader={vansLoader } 
+    errorElement={<Error />} />
     <Route path='vans/:id' element={<VanDetails />} />
     <Route path='hosts' element={<HostLayout />}>
       <Route index element={<Dashboard />} />
       <Route path='income' element={<Income />} />
-      <Route path='vans' element={<HostVans   />} loader={hostVansLoader}/>
-      <Route path='vans/:id' element={<HostVanDetatils />}>
+      <Route path='vans' element={<HostVans   />} loader={hostVansLoader}
+      errorElement={<Error />} />
+      <Route path='vans/:id' element={<HostVanDetatils />} loader={hostVanLoader} errorElement={<Error />} >
         <Route path='details' element={<Details />} />
         <Route path='photos' element={<Photos />} />
         <Route path='price' element={<Price />} />
