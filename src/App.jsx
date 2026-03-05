@@ -10,7 +10,7 @@ import HostLayout from './layouts/HostLayout'
 import Dashboard from './components/hosts/Dashboard'
 import Income from './components/hosts/Income'
 import Reviews from './components/hosts/Reviews'
-import HostVans from './pages/HostVans'
+import HostVans , { loader as vansLoader } from './pages/HostVans'
 import HostVanDetatils from './pages/HostVanDetatils'
 import Details from './components/hosts/Details'
 import Price from './components/hosts/Price'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='hosts' element={<HostLayout />}>
       <Route index element={<Dashboard />} />
       <Route path='income' element={<Income />} />
-      <Route path='vans' element={<HostVans />} />
+      <Route path='vans' element={<HostVans   />} loader={vansLoader}/>
       <Route path='vans/:id' element={<HostVanDetatils />}>
         <Route path='details' element={<Details />} />
         <Route path='photos' element={<Photos />} />
