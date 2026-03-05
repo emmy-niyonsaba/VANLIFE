@@ -25,18 +25,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<AppLayout />}>
-                //Vans router
+                {/* Vans router */}
             <Route index element={<Home></Home>}></Route>
             <Route path='about' element={<Aboout></Aboout>}></Route>
             <Route path='vans' element={<Vans></Vans>}></Route>
             <Route path='vans/:id' element={<VanDetails></VanDetails>}></Route>
 
-            // Hosts router
+            {/* Hosts router */}
             <Route path='hosts' element={<HostLayout />}>
               <Route index element={<Dashboard />}></Route>
               <Route path='income' element={<Income />}></Route>
               <Route path='vans' element={<HostVans />}></Route>
-              // the current van  router
+              {/* the current van  router */}
               <Route path='vans/:id' element={<HostVanDetatils />}>
                 <Route path='details' element={<Details />}></Route>
                 <Route path='photos' element={<Photos />}></Route>

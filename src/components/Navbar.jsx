@@ -1,39 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 function Navbar() {
-  return (  
-    <div className='flex items-center justify-between p-4 bg-[#FFF7ED] text-grey-100'>
-   <NavLink to='/'><h1 className=' text-[#000000] font-bold text-2xl'>#VANLIFE</h1></NavLink>
-    <div className=' flex gap-10 text-[#4D4D4D] '>
-       <NavLink
-  to="/hosts"
-  className={({ isActive }) =>
-    `hover:underline ${isActive ? "text-green-500" : ""}`
-  }
->
-  Hosts
-</NavLink>
+  const [open, setOpen] = useState(false)
 
-<NavLink
-  to="/about"
-  className={({ isActive }) =>
-    `hover:underline ${isActive ? "text-green-500" : ""}`
-  }
->
-  About
-</NavLink>
+  const linkClass = ({ isActive }) =>
+    `nav-link ${isActive ? 'active' : ''}`
 
-<NavLink
-  to="/vans"
-  className={({ isActive }) =>
-    `hover:underline ${isActive ? "text-green-500" : ""}`
-  }
->
-  Vans
-</NavLink>
-    </div>
-  </div>
+  return (
+    <header className="nav-root">
+      <div className="nav-inner">
+        <NavLink to='/' className="brand"><h1>#VANLIFE</h1></NavLink>
+        <button className="nav-toggle" onClick={() => setOpen(v => !v)} aria-label="Toggle menu">
+          <span className="hamburger" />
+        </button>
+        <nav className={`nav-links ${open ? 'open' : ''}`} onClick={() => setOpen(false)}>
+          <NavLink to="/hosts" className={linkClass}>Hosts</NavLink>
+          <NavLink to="/about" className={linkClass}>About</NavLink>
+          <NavLink to="/vans" className={linkClass}>Vans</NavLink>
+        </nav>
+      </div>
+    </header>
   )
 }
 
