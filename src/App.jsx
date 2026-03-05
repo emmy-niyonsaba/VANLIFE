@@ -3,14 +3,14 @@ import './App.css'
 import { RouterProvider,  Route, createRoutesFromElements,createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import Aboout from './pages/Aboout'
-import Vans from './pages/Vans'
+import Vans, {loader as vansLoader}from './pages/Vans'
 import VanDetails from './pages/VanDetails'
 import AppLayout from './layouts/AppLayout'
 import HostLayout from './layouts/HostLayout'
 import Dashboard from './components/hosts/Dashboard'
 import Income from './components/hosts/Income'
 import Reviews from './components/hosts/Reviews'
-import HostVans , { loader as vansLoader } from './pages/HostVans'
+import HostVans , { loader as hostVansLoader } from './pages/HostVans'
 import HostVanDetatils from './pages/HostVanDetatils'
 import Details from './components/hosts/Details'
 import Price from './components/hosts/Price'
@@ -21,12 +21,12 @@ const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
     <Route path='about' element={<Aboout />} />
-    <Route path='vans' element={<Vans />} />
+    <Route path='vans' element={<Vans />} loader={vansLoader } />
     <Route path='vans/:id' element={<VanDetails />} />
     <Route path='hosts' element={<HostLayout />}>
       <Route index element={<Dashboard />} />
       <Route path='income' element={<Income />} />
-      <Route path='vans' element={<HostVans   />} loader={vansLoader}/>
+      <Route path='vans' element={<HostVans   />} loader={hostVansLoader}/>
       <Route path='vans/:id' element={<HostVanDetatils />}>
         <Route path='details' element={<Details />} />
         <Route path='photos' element={<Photos />} />
