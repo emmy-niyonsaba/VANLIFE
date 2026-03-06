@@ -1,38 +1,37 @@
-import { useState } from "react"
-import { useLoaderData } from "react-router-dom"
-export const loginLoader = async ({ request }) => {
- return new URL(request.url).searchParams.get('message')
-    
-}
-function Login() {
-    const [formData, setFormData] = useState({})
-    const message  = useLoaderData()
-    console.log(message)
-    // const [password, setPassword] = useState("")
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    } 
-    const handChange = (e) => {
-        const {name, value} = e.target
-        setFormData({...formData, [name]: value})
-    }  
+import {Form } from "react-router-dom"
+
+ export async function action ({request}) {
+        const formData = await request.formData();
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        console.log('Email:', email);
+        console.log('Password:', password);
+
+       return null  
+    }
+
+function Login() {
+   
   return (
     <div>
-    {message &&<h1 className=" text-2xl font-bold text-red-500">{message}</h1>}
 
-      <form onSubmit={handleSubmit} className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10">
+      <Form  method="post"
+      className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10"
+      >
         <h1 className=" text-3xl  font-bold">Sign in to your account</h1>
-        <input type="email" name="email" onChange={handChange} placeholder=" Email Address" 
+   
+        <input type="email" name="email" placeholder=" Email Address" 
         className=" h-10 border-amber-200 border-2 rounded-md"
         />
-        <input type="password" name="password" onChange={handChange} placeholder=" Password" 
+        <input type="password" name="password"  placeholder=" Password" 
                 className=" h-10 border-amber-200 border-2 rounded-md"
 
         />
-        <button type="submit" className=" bg-[#FF8C38] rounded-md py-2">Login</button>
+        <button type="submit" className=" bg-[#FF8C38] rounded-md py-2 " >Login</button>
         <p>Don’t have an account? <span className=" text-[#FF8C38]">Create one now</span></p>
-      </form>
+      </Form>
     </div>
   )
 }
