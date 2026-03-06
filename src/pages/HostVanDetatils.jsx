@@ -17,12 +17,15 @@ export async function loader({ params }) {
 
   const data = await response.json()
 
-  return data.vans
+
+  return data.van
 }
 
 function HostVanDetatils() {
 
   const van = useLoaderData()
+  console.log(van)
+
 
   const linkClass = ({ isActive }) =>
     `font-bold hover:underline hover:bg-blue-200 p-2 rounded-md text-sm md:text-base ${
@@ -32,7 +35,7 @@ function HostVanDetatils() {
   return (
     <div className='max-w-5xl mx-auto w-full px-4 md:px-8'>
 
-      {van.map(v => (
+      {[van].map(v => (
         <HostVanDetailsLayout key={v.id} {...v} />
       ))}
 
@@ -42,7 +45,7 @@ function HostVanDetatils() {
         <NavLink to="price" className={linkClass}>Price</NavLink>
       </div>
 
-      {van[0] && <Outlet context={van[0]} />}
+      {van && <Outlet context={van} />}
 
     </div>
   )
