@@ -6,7 +6,8 @@ function Error() {
   return (
     <div>
       <h1>{error.message}</h1>
-      <h1>{error.status}-{error.statusText}</h1>
+      <h1>{error.status}</h1>
+    <Link to="/">Go back to home</Link>
     </div>
   )
 }

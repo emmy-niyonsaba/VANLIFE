@@ -1,7 +1,13 @@
 import { useState } from "react"
+import { useLoaderData } from "react-router-dom"
+export const loginLoader = async ({ request }) => {
+ return new URL(request.url).searchParams.get('message')
+    
+}
 function Login() {
     const [formData, setFormData] = useState({})
-
+    const message  = useLoaderData()
+    console.log(message)
     // const [password, setPassword] = useState("")
 
     const handleSubmit = (e) => {
@@ -13,6 +19,8 @@ function Login() {
     }  
   return (
     <div>
+    {message &&<h1 className=" text-2xl font-bold text-red-500">{message}</h1>}
+
       <form onSubmit={handleSubmit} className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10">
         <h1 className=" text-3xl  font-bold">Sign in to your account</h1>
         <input type="email" name="email" onChange={handChange} placeholder=" Email Address" 
