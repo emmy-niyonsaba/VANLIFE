@@ -1,8 +1,10 @@
 
 import {Form } from "react-router-dom"
-
+// This function will be called when the form is submitted
  export async function action ({request}) {
+  // Get the form data from the request
         const formData = await request.formData();
+        // 
         const email = formData.get('email');
         const password = formData.get('password');
 
@@ -16,7 +18,7 @@ function Login() {
    
   return (
     <div>
-
+// The Form component will handle the form submission and call the action function
       <Form  method="post"
       className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10"
       >
