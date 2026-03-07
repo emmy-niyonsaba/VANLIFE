@@ -19,6 +19,8 @@ import NotFound from './pages/NotFound'
 import Error from './pages/Error'
 import Login, {action}from './pages/Login'
 import { checkAuth } from '../utils/loginAuth'
+
+// Define the router with routes and their corresponding components, loaders, and actions
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
@@ -51,6 +53,7 @@ function App() {
 
   return (
     <>
+    // The RouterProvider component will render the appropriate component based on the current URL
       <RouterProvider router={router} />
     </>
   )
