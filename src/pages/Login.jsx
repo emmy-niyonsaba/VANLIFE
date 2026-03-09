@@ -1,14 +1,19 @@
 
-import {Form,redirect ,useLoaderData} from "react-router-dom"
+import {Form,redirect ,useLoaderData,useActionData,useNavigation} from "react-router-dom"
 import {loginUser} from '../../utils/loginAuth'
  export async function action ({request}) {
+    await sleep(3000)
         const formData = await request.formData();
         // 
         const email = formData.get('email');
         const password = formData.get('password');
-       const data = await loginUser({email,password})
+    try {
+         const data = await loginUser({email,password})
         localStorage.setItem('isAuthenticated', true)
-       console.log(data)
+    } catch (error) {
+      return error.message
+    }
+       
       //  console.log(data)
 redirect('/host')       
 return null
@@ -21,6 +26,8 @@ return null
     }
 function Login() {
     const message = useLoaderData()
+    const errorMessage = useActionData()
+    const navigation = useNavigation()
   return (
     <div>
 
@@ -29,6 +36,7 @@ function Login() {
       >
         <h1 className=" text-3xl  font-bold">Sign in to your account</h1>
         {message && <p className=" text-red-500">{message}</p>}
+        {errorMessage && <p className=" text-red-500">{errorMessage}</p>}
    
         <input type="email" name="email" placeholder=" Email Address" 
         className=" h-10 border-amber-200 border-2 rounded-md"
@@ -37,7 +45,9 @@ function Login() {
                 className=" h-10 border-amber-200 border-2 rounded-md"
 
         />
-        <button type="submit" className=" bg-[#FF8C38] rounded-md py-2 " >Login</button>
+        <button type="submit" className=" bg-[#FF8C38] rounded-md py-2 " disabled={navigation.state === 'submitting'} >
+          {navigation.state === 'submitting' ? 'Logging in...' : 'Login'}
+        </button>
         <p>Don’t have an account? <span className=" text-[#FF8C38]">Create one now</span></p>
       </Form>
     </div>

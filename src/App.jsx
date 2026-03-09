@@ -24,7 +24,7 @@ import { checkAuth } from '../utils/loginAuth'
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
-    <Route path='login' element={<Login />} action={action} loader={loginLoader} />
+    <Route path='login' element={<Login />} action={action} loader={loginLoader}  />
     <Route path='about' element={<Aboout />} />
     <Route path='vans' element={<Vans />} loader={vansLoader}
       errorElement={<Error />} />
@@ -50,7 +50,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 function App() {
 
-  return (
+  return (  
     <>
       <RouterProvider router={router} />
     </>
