@@ -2,9 +2,7 @@
 import {Form,redirect ,useLoaderData,useActionData,useNavigation} from "react-router-dom"
 import {loginUser} from '../../utils/loginAuth'
  export async function action ({request}) {
-    await sleep(3000)
         const formData = await request.formData();
-        // 
         const email = formData.get('email');
         const password = formData.get('password');
     try {
@@ -22,8 +20,9 @@ return null
     export const loader = ({request}) => {
         const url = new URL(request.url)
         const message = url.searchParams.get('message')
+        console.log(message)
         return message
-    }
+    } 
 function Login() {
     const message = useLoaderData()
     const errorMessage = useActionData()

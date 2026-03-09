@@ -1,5 +1,7 @@
-import { useSearchParams, useLoaderData } from 'react-router-dom'
+import { Suspense } from 'react'
+import { useSearchParams, useLoaderData, Await } from 'react-router-dom'
 import VansLayout from '../layouts/VansLayout'
+import Loading from '../components/Loading'
 
 const loadVans = async () => {
     const response = await fetch('/api/vans')
@@ -10,51 +12,66 @@ const loadVans = async () => {
     return data.vans
 }
 
+// Defer utility for React Router v7
+function defer(data) {
+    return data
+}
+
 export function loader() {
-    return loadVans()
+    return defer({ vans: loadVans() })
 }
 
 const Vans = () => {
-    const vans = useLoaderData()
+    const dataPromise = useLoaderData()
     const [searchParams, setSearchParams] = useSearchParams()
-    const filterType = searchParams.get('type');
-    const filteredVans = filterType ? vans.filter(van => van.type === filterType) : vans;
+    const filterType = searchParams.get('type')
 
     // Categories
     const categories = ["simple", "luxury", "rugged"]
 
-
     return (
         <>
-            <h1 className=' text-3xl md:text-5xl font-bold my-6 px-4 md:px-10'>Explore our van options</h1>
+            <h1 className='text-3xl md:text-5xl font-bold my-6 px-4 md:px-10'>Explore our van options</h1>
             <div className='flex flex-wrap gap-3 md:gap-4 items-center px-4 md:px-10'>
                 {categories.map((category) => {
                     return (
-                        <button key={category} className=' bg-[#f0ca9c] text-white px-4 py-2 rounded-md capitalize'
-                            onClick={() => setSearchParams({ type: category })}>{category}</button>
+                        <button 
+                            key={category} 
+                            className='bg-[#f0ca9c] text-white px-4 py-2 rounded-md capitalize'
+                            onClick={() => setSearchParams({ type: category })}
+                        >
+                            {category}
+                        </button>
                     )
                 })}
-                {
-                    filterType ? (
-                        <button onClick={() => setSearchParams({})} className='font-bold text-base md:text-xl underline'>Clear Filter</button>
-
-                    ) : null
-                }
+                {filterType && (
+                    <button 
+                        onClick={() => setSearchParams({})} 
+                        className='font-bold text-base md:text-xl underline'
+                    >
+                        Clear Filter
+                    </button>
+                )}
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 md:px-10 mt-8'>
-                {
+            
+            <Suspense fallback={<Loading message="Loading Vans..." />}>
+                <Await resolve={dataPromise.vans}>
+                    {(vans) => {
+                        const filteredVans = filterType 
+                            ? vans.filter(van => van.type === filterType) 
+                            : vans
 
-
-                    filteredVans.map((van) => {
                         return (
-                            <VansLayout key={van.id} {...van} />
+                            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 md:px-10 mt-8'>
+                                {filteredVans.map((van) => (
+                                    <VansLayout key={van.id} {...van} />
+                                ))}
+                            </div>
                         )
-                    })
-                }
-
-            </div>
+                    }}
+                </Await>
+            </Suspense>
         </>
-
     )
 }
 
