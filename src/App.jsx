@@ -17,14 +17,14 @@ import Price from './components/hosts/Price'
 import Photos from './components/hosts/Photos'
 import NotFound from './pages/NotFound'
 import Error from './pages/Error'
-import Login, {action}from './pages/Login'
+import Login, {action ,loader as loginLoader}from './pages/Login'
 import { checkAuth } from '../utils/loginAuth'
 
 // Define the router with routes and their corresponding components, loaders, and actions
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
-    <Route path='login' element={<Login />} action={action} />
+    <Route path='login' element={<Login />} action={action} loader={loginLoader} />
     <Route path='about' element={<Aboout />} />
     <Route path='vans' element={<Vans />} loader={vansLoader}
       errorElement={<Error />} />

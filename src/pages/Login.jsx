@@ -1,5 +1,5 @@
 
-import {Form,redirect } from "react-router-dom"
+import {Form,redirect ,useLoaderData} from "react-router-dom"
 import {loginUser} from '../../utils/loginAuth'
  export async function action ({request}) {
         const formData = await request.formData();
@@ -14,9 +14,13 @@ redirect('/host')
 return null
 
     }
-
+    export const loader = ({request}) => {
+        const url = new URL(request.url)
+        const message = url.searchParams.get('message')
+        return message
+    }
 function Login() {
-   
+    const message = useLoaderData()
   return (
     <div>
 
@@ -24,6 +28,7 @@ function Login() {
       className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10"
       >
         <h1 className=" text-3xl  font-bold">Sign in to your account</h1>
+        {message && <p className=" text-red-500">{message}</p>}
    
         <input type="email" name="email" placeholder=" Email Address" 
         className=" h-10 border-amber-200 border-2 rounded-md"
