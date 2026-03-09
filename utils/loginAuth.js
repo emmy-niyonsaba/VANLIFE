@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom"
 export const checkAuth = () => {
-    const isAuthenticated = true
+    const isAuthenticated = localStorage.getItem('isAuthenticated')
     if (!isAuthenticated) {
         throw redirect('/login?message=You must be logged in to access The page')
     }

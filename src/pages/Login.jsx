@@ -1,24 +1,25 @@
 
-import {Form } from "react-router-dom"
-// This function will be called when the form is submitted
+import {Form,redirect } from "react-router-dom"
+import {loginUser} from '../../utils/loginAuth'
  export async function action ({request}) {
-  // Get the form data from the request
         const formData = await request.formData();
         // 
         const email = formData.get('email');
         const password = formData.get('password');
+       const data = await loginUser({email,password})
+        localStorage.setItem('isAuthenticated', true)
+       console.log(data)
+      //  console.log(data)
+redirect('/host')       
+return null
 
-        console.log('Email:', email);
-        console.log('Password:', password);
-
-       return null  
     }
 
 function Login() {
    
   return (
     <div>
-// The Form component will handle the form submission and call the action function
+
       <Form  method="post"
       className=" flex flex-col gap-10 w-full max-w-sm mx-auto mt-10"
       >

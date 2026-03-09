@@ -36,7 +36,6 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='vans' element={<HostVans />} loader={hostVansLoader}
         errorElement={<Error />} />
 
-        // Nested routes for host van details
       <Route path='vans/:id' element={<HostVanDetatils />} loader={hostVanLoader} errorElement={<Error />} >
         <Route path='details' element={<Details />} />
         <Route path='photos' element={<Photos />} />
@@ -53,7 +52,6 @@ function App() {
 
   return (
     <>
-    // The RouterProvider component will render the appropriate component based on the current URL
       <RouterProvider router={router} />
     </>
   )

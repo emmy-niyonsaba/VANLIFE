@@ -19,6 +19,7 @@ function Navbar() {
           <NavLink to="/hosts" className={linkClass}>Hosts</NavLink>
           <NavLink to="/about" className={linkClass}>About</NavLink>
           <NavLink to="/vans" className={linkClass}>Vans</NavLink>
+          <button onClick={() => localStorage.removeItem('isAuthenticated')}  className=' hover:cursor-pointer'>Logout</button>
         </nav>
       </div>
     </header>
