@@ -1,5 +1,6 @@
 import React from "react"
 // import { BsStarFill } from "react-icons/bs"
+import { star,reviews } from "../../../public/images/index"
 
 export default function Reviews() {
     const reviewsData = [
@@ -18,28 +19,35 @@ export default function Reviews() {
             id: "2",
         },
     ]
-    
+
     return (
-        <section className="host-reviews">
-            <div className="top-text">
-                <h2>Your reviews</h2>
+        <section className=" flex flex-col gap-10 mt-5">
+            <div className=" flex items-center  gap-6">
+                <h2 className=" text-2xl font-bold">Your reviews</h2>
                 <p>
-                    Last <span>30 days</span>
+                    Last <span className=" underline font-bold" >30 days</span>
                 </p>
             </div>
-            <img
-                className="graph"
-                src="/assets/images/reviews-graph.png"
-                alt="Review graph"
-            />
+            <div>
+                <div className=" flex items-center gap-2">
+                    <h1>5.0</h1>
+                    <img src={star} alt="star" />
+                    <p>Overall rating</p>
+                </div>
+                <img src={reviews} alt="reviews" />
+            </div>
+
             <h3>Reviews (2)</h3>
             {reviewsData.map((review) => (
-                <div key={review.id}>
-                    <div className="review">
-                        {[...Array(review.rating)].map((_, i) => (
-                            // <BsStarFill className="review-star" key={i} />
-                          <h1>heee</h1>
-                        ))}
+                <div key={review.id} className=" flex flex-col gap-10">
+                    <div className=" flex flex-col gap-4">
+                            <div className=" flex items-center gap-2"> 
+                                <img src={star} alt="star" />
+                                <img src={star} alt="star" />
+                                <img src={star} alt="star" />
+                                <img src={star} alt="star" />
+                                <img src={star} alt="star" />
+                            </div>
                         <div className="info">
                             <p className="name">{review.name}</p>
                             <p className="date">{review.date}</p>

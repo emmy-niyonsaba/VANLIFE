@@ -1,5 +1,5 @@
 import React from "react"
-
+import { income } from "../../../public/images/index"
 export default function Income() {
     const transactionsData = [
         { amount: 720, date: "Jan/3/23", id: "1" },
@@ -13,11 +13,7 @@ export default function Income() {
                 Last <span className=" underline font-bold">30 days</span>
             </p>
             <h2 className=" text-4xl font-bold ">$2,260</h2>
-            <img
-                className="graph"
-                src="/assets/images/income-graph.png"
-                alt="Income graph"
-            />
+                <img src={income} alt="income" />
             <div className=" flex items-center justify-between">
                 <h3>Your transactions (3)</h3>
                 <p className="text-sm ">
