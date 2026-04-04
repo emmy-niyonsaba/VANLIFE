@@ -22,6 +22,8 @@ import { checkAuth } from '../utils/loginAuth'
 
 // Define the router with routes and their corresponding components, loaders, and actions
 const router = createBrowserRouter(createRoutesFromElements(
+
+  
   <Route path='/' element={<AppLayout />}>
     <Route index element={<Home />} />
     <Route path='login' element={<Login />} action={action} loader={loginLoader}  />

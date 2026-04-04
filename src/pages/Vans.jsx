@@ -44,6 +44,9 @@ const Vans = () => {
                         </button>
                     )
                 })}
+
+
+                {/* This section is to display the final vans besed on filtervans */}
                 {filterType && (
                     <button 
                         onClick={() => setSearchParams({})} 
