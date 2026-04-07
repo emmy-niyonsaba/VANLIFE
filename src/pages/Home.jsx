@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { homebg } from '../../public/images'
 import { Link } from 'react-router-dom'
+
+
+
+// This the home  page Component
 function Home() {
   return (
     <div className=" min-h-screen "
